@@ -48,3 +48,9 @@
   color: white;
   padding: 20px;
 }
+
+.link-seg {
+  min-height: 192px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

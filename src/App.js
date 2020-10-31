@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Segment } from 'semantic-ui-react';
+import { Grid, Segment, Menu } from 'semantic-ui-react';
 //import logo from './3822_FLOOSHED.png';
 import './App.css';
 
@@ -62,25 +62,16 @@ function linkToElem(numCols) {
   return out;
 }
 
-/*<img src={logo} className="App-logo" alt="logo" />
-          <Grid.Row>
-            <Grid.Column>
-              <Segment><a href={links.rickroll}>rickroll</a></Segment>
-            </Grid.Column>
-            <Grid.Column>
-              <Segment><a href={links.meta_rickroll}>meta_rickroll</a></Segment>
-            </Grid.Column>
-          </Grid.Row>
-            <JsxParser
-                components={{Grid,Segment}}
-                jsx={linkToElem(3)}
-            />*/
-
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <h1>CMU Quick Clicks</h1>
+        <Menu>
+          <Menu.Item name='tag1'>First Tag</Menu.Item>
+          <Menu.Item name='tag2'>Second Tag</Menu.Item>
+        </Menu>
+        {/* Perhaps these should be organized in a grid */}
       </header>
       <div className="grid">
         <Grid columns={3}>
