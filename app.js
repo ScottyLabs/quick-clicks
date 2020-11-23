@@ -31,7 +31,8 @@ app.post('/create-site', function(req, res) {
     })
 })
 
-//to test queries in Compass: everything inside the brackets: from "category" to "}"
+//quick note: 
+//to test queries in Compass: use everything inside the brackets: from "category" to "}"
 app.get('/database-all', function(req, res) {
   Site.find({category: {
     $in: ["food"]
