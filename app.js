@@ -20,7 +20,8 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 //post function
-app.post('/create-site', function(req, res) {
+//uses req.body from Postman
+app.post('/create', function(req, res) {
   const site = new Site(req.body);
   site.save() 
     .then((result) => {
@@ -32,14 +33,33 @@ app.post('/create-site', function(req, res) {
 })
 
 //quick note: 
-//to test queries in Compass: use everything inside the brackets: from "category" to "}"
-app.get('/database-all', function(req, res) {
-  Site.find({category: {
-    $in: ["food"]
-  }}, (function (err, site) {
-    return res.json(site)
-  }))
-})
+//to test queries in Compass: use everything inside the brackets: from "{category" to "}"
+app.post('/sites', function(req, res) {
+  let tags = null;
+
+  if (req.body.tags != null) {
+    tags = req.body.tags;
+  }
+
+  if (tags != null) {
+    Site.find(
+      {
+        category: {
+          $in: tags, 
+        }, 
+      },
+      function(err, site) {
+        return res.json(site);
+      }
+    );
+  } else {
+    Site.find({}, function (err, site) {
+      return res.json(site);
+    });
+  }  
+});
+
+
 
 
 
@@ -47,7 +67,7 @@ app.get('/database-all', function(req, res) {
 
 // -----DON'T WORRY ABOUT IT----- // 
 // view engine setup
-app.set('views', path.join(__dirname, 'views_new'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
