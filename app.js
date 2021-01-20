@@ -61,10 +61,6 @@ app.post('/sites', function(req, res) {
 
 
 
-
-
-
-
 // -----DON'T WORRY ABOUT IT----- // 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

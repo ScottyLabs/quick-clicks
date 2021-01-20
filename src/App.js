@@ -16,6 +16,16 @@ function App() {
     {"_id":{"$oid":"5fcbd4d07146beafb401bc1c"},"name":"Tech","category":["Tech"],"description":"Site for tech things","link":"tech.com"}
   ]);
 
+  const retrieveWebsites = () => {
+    //WHAT SHOULD THE REQUEST URL BE?
+    const requestURL = "";
+    //don't pass in any data to post request
+    axios.post(requestURL).then((res) => {
+      setAllWebsites(res);
+    })
+  };
+
+
   const [irrelevantSections, setIrrelevantSections] = useState([]);
 
   const editIrrelevantSections = (sectionToChange) => {
@@ -49,12 +59,11 @@ function App() {
   //on load
   useEffect(() => {
     
-    // query the API and save to allWebsites state
-    // use an axios post request here
+    // query the API and save to allWebsites
     // post request: pass in array of categories
     // {tags: [tag1, tag2, ...]}
     // if we want all the websites: don't pass anything
-    
+    retrieveWebsites();
     countUniqueSections(); 
   }, []);
 
