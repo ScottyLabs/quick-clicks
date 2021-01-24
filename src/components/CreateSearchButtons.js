@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkbox, Container } from 'semantic-ui-react';
+import { Checkbox } from 'semantic-ui-react';
 
 //PROPS: array of "UniqueSections", a function to edit the "relevant websites" state
 const createSearchButtons = (props) => {

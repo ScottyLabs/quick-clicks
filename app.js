@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 const Site = require('./server/schemaOutline');
 const { StringDecoder } = require('string_decoder');
 const dotenv = require("dotenv");
+const cors = require("cors");
 dotenv.config();
 
 var app = express();
@@ -18,6 +19,7 @@ mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true})
   .catch((err) => console.log(err));
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 
 //post function
 //uses req.body from Postman

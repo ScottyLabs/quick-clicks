@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container, Header} from 'semantic-ui-react';
 import CreateSearchButtons from './CreateSearchButtons'
 
 //PROPS: array of "UniqueSection", function to edit relevant websites
