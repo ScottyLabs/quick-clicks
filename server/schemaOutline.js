@@ -5,7 +5,8 @@ const siteSchema = new Schema({
     name: String, 
     category: [String], 
     description: String, 
-    link: String
+    link: String,
+    active: Boolean
 })
 
 const Site = mongoose.model('Site', siteSchema);

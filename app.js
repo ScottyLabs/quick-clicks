@@ -8,6 +8,7 @@ const Site = require('./server/schemaOutline');
 const { StringDecoder } = require('string_decoder');
 const dotenv = require("dotenv");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 dotenv.config();
 
 var app = express();
@@ -18,16 +19,18 @@ mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true})
   .then((result) => console.log('connected to db'))
   .catch((err) => console.log(err));
 app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
-app.use(cors())
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(cors());
 
 //post function
 //uses req.body from Postman
-app.post('/create', function(req, res) {
-  const site = new Site(req.body);
+app.put('/create', function(req, res) {
+  const site = new Site({...req.body, active: true});
+  console.log(req.body);
   site.save() 
     .then((result) => {
-        //what we do after saving? Do nothing?
+        res.json(result);
     })
     .catch((err) => {
       console.log(err);
@@ -48,18 +51,43 @@ app.post('/sites', function(req, res) {
       {
         category: {
           $in: tags, 
-        }, 
+        },
+        active: true 
       },
       function(err, site) {
         return res.json(site);
       }
     );
   } else {
-    Site.find({}, function (err, site) {
+    Site.find({active: true}, function (err, site) {
       return res.json(site);
     });
   }  
 });
+
+app.delete('/delete', function(req, res) {
+
+  let name = req.query.name;
+
+  console.log(name);
+
+  if (name != null) {
+    Site.updateOne(
+      {
+        name: name
+      },
+      {
+        active: false
+      },
+      function(err, site) {
+        return res.json(site);
+      }
+    );
+  } else {
+      res.status(400).json({message: "delete request missing name"});
+  }  
+});
+
 
 
 
