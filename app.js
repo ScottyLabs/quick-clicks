@@ -13,7 +13,7 @@ dotenv.config();
 
 var app = express();
 
-//Mongoose stuff?
+//Mongoose stuff
 const dbURL = process.env["MONGODB_URL"];
 mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true})
   .then((result) => console.log('connected to db'))
@@ -23,11 +23,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
 
+
+//CREATE A NEW SITE
 //post function
 //uses req.body from Postman
 app.put('/create', function(req, res) {
+  //automatically set the "active" field to true
   const site = new Site({...req.body, active: true});
-  console.log(req.body);
   site.save() 
     .then((result) => {
         res.json(result);
@@ -37,6 +39,7 @@ app.put('/create', function(req, res) {
     })
 })
 
+//FETCH ALL THE SITES
 //quick note: 
 //to test queries in Compass: use everything inside the brackets: from "{category" to "}"
 app.post('/sites', function(req, res) {
@@ -65,11 +68,11 @@ app.post('/sites', function(req, res) {
   }  
 });
 
-app.delete('/delete', function(req, res) {
+
+//DELETE/SET VISIBILITY OF SITES
+app.delete('/set-invisible', function(req, res) {
 
   let name = req.query.name;
-
-  console.log(name);
 
   if (name != null) {
     Site.updateOne(
@@ -84,9 +87,26 @@ app.delete('/delete', function(req, res) {
       }
     );
   } else {
-      res.status(400).json({message: "delete request missing name"});
+      res.status(400).json({message: "set-invisible request is missing name"});
   }  
 });
+
+app.delete('/delete', function(req, res) {
+
+  let name = req.query.name;
+
+  if (name != null) {
+    
+    Site.findOneAndDelete({ name: name}, function(err, site) {
+        return res.json(site);
+      }
+    );
+  } else {
+      res.status(400).json({message: "delete request is missing name"});
+  }  
+});
+
+
 
 
 

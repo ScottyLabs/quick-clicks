@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'; 
 
-const useFetchData = (url) => {
+const useFetchData = (url, changingState) => {
 
     const [dataToReturn, setDataToReturn] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [dataIsValid, setDataIsValid] = useState(true);
 
     useEffect(() => {
         axios.post(url)
@@ -17,13 +16,12 @@ const useFetchData = (url) => {
             setDataToReturn(res.data);
             setIsLoading(false);
             setError(null);
-            setDataIsValid(true);
           })
           .catch(err => {
             setError(err.message);
             setIsLoading(false);
          })
-    }, [dataIsValid]);
+    }, [changingState]);
 
     return {dataToReturn, isLoading, error};
 };

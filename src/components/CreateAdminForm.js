@@ -2,9 +2,11 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Container } from 'semantic-ui-react';
 
-//PROPS: none
-const CreateAddWebsiteForm = () => {
+//PROPS: databasedChanged function
+const CreateAdminForm = (props) => {
 
+    const databaseChanged = props.databaseChanged;
+    
     const [siteName, setSiteName] = useState("");
     const [categories, setCategories] = useState([]);
     const [description, setDescription] = useState("");
@@ -24,6 +26,7 @@ const CreateAddWebsiteForm = () => {
         axios.put(postURL, currentSite)
             .then(() => {
                 setLoading(false);
+                databaseChanged();
                 console.log("new site added");
             });
     };
@@ -71,4 +74,4 @@ const CreateAddWebsiteForm = () => {
     );
 }
  
-export default CreateAddWebsiteForm;
+export default CreateAdminForm;

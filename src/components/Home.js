@@ -14,6 +14,7 @@ const Home = () => {
     //   {"_id":{"$oid":"5fcbd2c67146beafb401bc1b"},"name":"Sports","category":["Sports", "Food"],"description":"Site for sports places","link":"sports.com"}, 
     //   {"_id":{"$oid":"5fcbd4d07146beafb401bc1c"},"name":"Tech","category":["Tech"],"description":"Site for tech things","link":"tech.com"}
     // ]);
+
   
     const requestURL = process.env["REACT_APP_SERVERURL"] + "/sites";
   

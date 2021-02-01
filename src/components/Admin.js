@@ -1,24 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'semantic-ui-css/semantic.min.css'
 import { Container } from 'semantic-ui-react';
 import useFetchData from '../useFetchData';
 import CreateAdminList from './CreateAdminList';
-import CreateAddWebsiteForm from './CreateAddWebsiteForm';
+import CreateAdminForm from './CreateAdminForm';
 
 //PROPS: none
-//TO ADD: form to add websites, a way to delete all the websites that pop up
-const Admin = (props) => {
+const Admin = () => {
 
     const requestURL = process.env["REACT_APP_SERVERURL"] + "/sites";
-    //get the data: allWebsites is an array of websites
-    const {dataToReturn: allWebsites, isLoading, error} = useFetchData(requestURL);
 
+    const [databaseEdited, setDatabaseEdited] = useState(0);
+    const databaseChanged = () => {
+      setDatabaseEdited(databaseEdited + 1);
+    };
+
+     //get the data: allWebsites is an array of websites
+    const {dataToReturn: allWebsites, isLoading, error} = useFetchData(requestURL, databaseEdited);
+  
     return (
         <Container>
           <h2>Admin Page</h2>
           <br></br>
           <div className="Admin Form">
-            <CreateAddWebsiteForm></CreateAddWebsiteForm>    
+            <CreateAdminForm databaseChanged={databaseChanged}></CreateAdminForm>    
           </div>  
           <br></br>
           <br></br>
@@ -26,7 +31,7 @@ const Admin = (props) => {
           <div className="Admin List"> 
             { isLoading && <div>Loading...</div>}
             { error && <div>{ error }</div>}
-            { allWebsites && <CreateAdminList websites={allWebsites}></CreateAdminList>}
+            { allWebsites && <CreateAdminList websites={allWebsites} databaseChanged={databaseChanged}></CreateAdminList>}
           </div>
         </Container>
       );
