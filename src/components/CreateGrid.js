@@ -1,8 +1,10 @@
 import React from 'react';
-import { Grid, Segment } from 'semantic-ui-react';
+import { Grid, Segment, Button} from 'semantic-ui-react';
 
-//PROPS: an array "websites" to create grid for
+//PROPS: an array "websites" to create grid for, openModalFunction
 const CreateGrid = (props) => {
+
+    const openModalFunction = props.openModalFunction;
 
     let count;
     if (props.websites) {
@@ -27,9 +29,11 @@ const CreateGrid = (props) => {
         const fullRow = [];
         for (var k = 1; k <= 4; k++) {
             const websiteName = props.websites[index].name;
+            const websiteDescription = props.websites[index].description;
             const singleElement = (
                 <Grid.Column key={websiteName}>
-                    <Segment> {websiteName} </Segment>
+                    {/* <Segment> {websiteName} </Segment> */}
+                    <Button onClick={() => openModalFunction(websiteName, websiteDescription)}> {websiteName} </Button>
                 </Grid.Column>
             );
             fullRow.push(singleElement);
@@ -47,9 +51,11 @@ const CreateGrid = (props) => {
         const lastRow = []
         for (var j = 1; j <= extra; j++) {
             const websiteName = props.websites[index].name;
+            const websiteDescription = props.websites[index].description;
             const singleElement = (
                 <Grid.Column key={websiteName}>
-                    <Segment> {websiteName} </Segment>
+                    {/* <Segment> {websiteName} </Segment> */}
+                    <Button onClick={() => openModalFunction(websiteName, websiteDescription)}> {websiteName} </Button>
                 </Grid.Column>
             );
             lastRow.push(singleElement);

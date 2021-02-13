@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'semantic-ui-css/semantic.min.css'
-import { Container } from 'semantic-ui-react';
+import { Container, Modal, Button } from 'semantic-ui-react';
 import CreateWebsitesGrid from './CreateWebsitesGrid';
 import CreateSearchBar from './CreateSearchBar';
 import useFetchData from '../useFetchData';
@@ -58,7 +58,7 @@ const Home = () => {
     useEffect(() => {
       countUniqueSections(); 
     }, [allWebsites]);
-  
+
     return (
       <Container>
         { isLoading && <div>Loading...</div>}
@@ -66,7 +66,10 @@ const Home = () => {
         { allWebsites && <CreateSearchBar uniqueSections={uniqueSections} editIrrelevantSections={editIrrelevantSections}></CreateSearchBar>}
         { allWebsites && <CreateWebsitesGrid websites={allWebsites} 
                           uniqueSections={uniqueSections.filter((section) => !irrelevantSections.includes(section))}>
+        
         </CreateWebsitesGrid>}
+
+
       </Container>
     );
   }
