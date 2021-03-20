@@ -10,8 +10,8 @@ const CreateAdminListItem = (props) => {
     const databaseChanged = props.databaseChanged;
 
     const [loading, setLoading] = useState(false);
-    const visibleURL = process.env["REACT_APP_SERVERURL"] + "/set-invisible";
-    const deleteURL = process.env["REACT_APP_SERVERURL"] + "/delete";
+    const visibleURL = process.env["REACT_APP_SERVERURL"] + "/API/set-invisible";
+    const deleteURL = process.env["REACT_APP_SERVERURL"] + "/API/delete";
 
     const visibilityHandler = () => {
         setLoading(true);

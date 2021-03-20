@@ -16,7 +16,7 @@ const Home = () => {
     // ]);
 
   
-    const requestURL = process.env["REACT_APP_SERVERURL"] + "/sites";
+    const requestURL = process.env["REACT_APP_SERVERURL"] + "/API/sites";
   
     //get the data
     const {dataToReturn: allWebsites, isLoading, error} = useFetchData(requestURL);
@@ -66,10 +66,7 @@ const Home = () => {
         { allWebsites && <CreateSearchBar uniqueSections={uniqueSections} editIrrelevantSections={editIrrelevantSections}></CreateSearchBar>}
         { allWebsites && <CreateWebsitesGrid websites={allWebsites} 
                           uniqueSections={uniqueSections.filter((section) => !irrelevantSections.includes(section))}>
-        
         </CreateWebsitesGrid>}
-
-
       </Container>
     );
   }

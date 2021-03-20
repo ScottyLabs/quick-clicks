@@ -8,7 +8,7 @@ import CreateAdminForm from './CreateAdminForm';
 //PROPS: none
 const Admin = () => {
 
-    const requestURL = process.env["REACT_APP_SERVERURL"] + "/sites";
+    const requestURL = process.env["REACT_APP_SERVERURL"] + "/API/sites";
 
     const [databaseEdited, setDatabaseEdited] = useState(0);
     const databaseChanged = () => {

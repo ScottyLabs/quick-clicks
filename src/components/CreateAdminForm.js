@@ -11,7 +11,7 @@ const CreateAdminForm = (props) => {
     const [categories, setCategories] = useState([]);
     const [description, setDescription] = useState("");
     const [link, setLink] = useState("");
-    const postURL = process.env["REACT_APP_SERVERURL"] + "/create";
+    const postURL = process.env["REACT_APP_SERVERURL"] + "/API/create";
     const [loading, setLoading] = useState(false);
 
 
