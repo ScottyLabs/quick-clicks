@@ -10,6 +10,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const APIroutes = require("./routes/API");
+const authRoutes = require("./routes/auth");
 const initAdmin = require("./server/initAdmin");
 
 dotenv.config();
@@ -41,6 +42,9 @@ const APIrouter = express.Router();
 APIroutes(APIrouter);
 app.use("/API", APIrouter);
 
+const authRouter = express.Router();
+authRoutes(authRouter);
+app.use("/auth", authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

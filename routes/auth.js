@@ -8,11 +8,12 @@ module.exports = (app) => {
         var { username, password } = req.body;
         
         try {
-            const user = await User.find({username});
-            
+            const user = await User.findOne({username});
+
             if (user == null) {
                 return res.status(404).json({"message": "user not found"})
-            } 
+            }
+            
             if (!user.checkPassword(password)) {
                 return res.status(403).json({"message": "incorrect password"})
             }

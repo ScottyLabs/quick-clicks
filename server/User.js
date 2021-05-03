@@ -18,8 +18,9 @@ userSchema.statics.generateHash = (password) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 }
 
-userSchema.methods.checkPassword = (password) => {
-    return bcrypt.compareSync(password, this.password)
+userSchema.methods.checkPassword = function (password) {
+    console.log(password, "vs.", this.password)
+    return bcrypt.compareSync(password, this.password);
 }
 
 const User = mongoose.model('User', userSchema);

@@ -5,8 +5,7 @@ module.exports = async () => {
     const adminPassword = process.env["ADMIN_PASSWORD"];
 
     try {
-        const user = await User.find({adminUsername});
-        console.log(user);
+        const user = await User.find({username: adminUsername});
 
         if (user.length == 0) {
 
@@ -30,6 +29,5 @@ module.exports = async () => {
         console.log("error looking up admin user on startup")
         console.log(error);
     }
-
-
 }
+

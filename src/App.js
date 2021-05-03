@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { Container, Header} from 'semantic-ui-react';
 import Home from './components/Home';
 import Admin from './components/Admin';
+import AdminLoginForm from './components/AdminLoginForm';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
@@ -15,6 +16,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home></Home>
+          </Route>
+          <Route exact path = '/admin-login'>
+            <AdminLoginForm></AdminLoginForm>
           </Route>
           <Route path="/admin">
             <Admin></Admin>
